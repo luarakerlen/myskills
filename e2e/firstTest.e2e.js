@@ -1,4 +1,4 @@
-describe('Example', () => {
+describe('Home Screen', () => {
   beforeAll(async () => {
     await device.launchApp();
   });
@@ -11,13 +11,29 @@ describe('Example', () => {
     await expect(element(by.id('welcome'))).toBeVisible();
   });
 
-  it('should show hello screen after tap', async () => {
-    await element(by.id('hello_button')).tap();
-    await expect(element(by.text('Hello!!!'))).toBeVisible();
+  it('should register a new skill', async () => {
+    const inputNewSkill = await element(by.id('input-new-skill'));
+    const buttonNewSkill = await element(by.id('button-add-skill'));
+    const flatlistSkills = await element(by.id('flatlist-skills'));
+
+    await inputNewSkill.tap();
+    await inputNewSkill.typeText('React Native\n');
+
+    await buttonNewSkill.tap();
+
+    await expect(flatlistSkills).toBeVisible();
   });
 
-  it('should show world screen after tap', async () => {
-    await element(by.id('world_button')).tap();
-    await expect(element(by.text('World!!!'))).toBeVisible();
+  it('should have the new skill', async () => {
+    const inputNewSkill = await element(by.id('input-new-skill'));
+    const buttonNewSkill = await element(by.id('button-add-skill'));
+    
+    await inputNewSkill.tap();
+    await inputNewSkill.typeText('Testes E2E\n');
+    
+    await buttonNewSkill.tap();
+    
+    const newSkill = await element(by.id('text-skill-Testes E2E'));
+    await expect(newSkill).toBeVisible();
   });
 });
