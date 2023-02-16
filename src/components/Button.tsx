@@ -20,7 +20,7 @@ export function Button({title, ...rest}: ButtonProps) {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#F45',
+    backgroundColor: '#A370F7',
     padding: 15,
     marginTop: 20,
     alignItems: 'center',
