@@ -1,11 +1,15 @@
 import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 import {Home} from './src/pages/Home';
-import SplasScreen from 'react-native-splash-screen';
+import SplashScreen from 'react-native-splash-screen';
+import codePush from 'react-native-code-push';
 
-export default function App() {
+function App() {
   useEffect(() => {
-    SplasScreen.hide();
+    codePush.sync({
+      installMode: codePush.InstallMode.IMMEDIATE,
+    });
+    SplashScreen.hide();
   }, []);
 
   return (
@@ -15,3 +19,7 @@ export default function App() {
     </>
   );
 }
+
+export default codePush({
+  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+})(App);
